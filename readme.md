@@ -1,4 +1,4 @@
-# GachaGame - Versión 1.1
+# DB GAME CARDS - Versión 1.1
 
 Este proyecto en Python implementa un sistema de gacha donde los jugadores pueden realizar tiradas, coleccionar cartas y gestionar sus recursos de forma interactiva. 
 
