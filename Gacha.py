@@ -259,6 +259,17 @@ def agregar_carta_personalizada():
     else:
         print_colored("La rareza ingresada no es válida. La carta no ha sido agregada.", "31")
 
+def buscar_carta_dinamica():
+    termino = input("Ingresa el nombre de la carta para buscarlo en tu colección: ").strip().lower()
+    resultados = [carta for carta in coleccion if termino in carta.lower()]
+
+    if resultados:
+        print_colored(f"Cartas encontradas: '{termino}':", "36")
+        for carta in resultados:
+            print(f"- {carta}")
+    else:
+        print_colored(f"No se encontraron cartas que coincidan con tu búsqueda '{termino}'.", "31")
+
 # Función principal del juego
 def juego():
     verificar_directorio()
@@ -274,7 +285,8 @@ def juego():
         print("6. Mostrar cartas por rareza")
         print("7. Eliminar carta de la colección")
         print("8. Agregar carta personalizada")
-        print("9. Salir")
+        print("9. Buscar cartas dinámicamente")
+        print("10. Salir")
         
         comando = input("Ingresa un comando: ").strip().lower()
         if comando == "1":
@@ -295,6 +307,8 @@ def juego():
         elif comando == "8":
             agregar_carta_personalizada()
         elif comando == "9":
+            buscar_carta_dinamica()
+        elif comando == "10":
             guardar_progreso()
             print_colored("Guardando el juego... ¡Hasta la próxima!", "34")
             break
