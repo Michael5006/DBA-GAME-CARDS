@@ -231,6 +231,34 @@ def realizar_tirada():
         elif rareza == "legendaria":
             historial_tiradas[0][2] += 1
 
+def mostrar_cartas_por_rareza(rareza):
+    cartas_filtradas = [carta for carta in coleccion if carta in cartas[rareza]]
+    if cartas_filtradas:
+        print_colored(f"Cartas de rareza {rareza}:", "36")
+        for carta in cartas_filtradas:
+            print(f"- {carta}")
+    else:
+        print_colored(f"No tienes cartas de rareza {rareza}.", "31")
+
+def eliminar_carta():
+    carta_a_eliminar = input("Ingresa el nombre de la carta que deseas eliminar: ").strip()
+    if carta_a_eliminar in coleccion:
+        coleccion.remove(carta_a_eliminar)
+        print_colored(f"La carta {carta_a_eliminar} ha sido eliminada de tu colección.", "32")
+    else:
+        print_colored(f"No tienes la carta {carta_a_eliminar} en tu colección.", "31")
+
+def agregar_carta_personalizada():
+    nueva_carta = input("Ingresa el nombre de la nueva carta: ").strip()
+    rareza = input ("Ingresa la rareza de la carta (comun, rara, legendaria): ").strip().lower()
+
+    if rareza in cartas:
+        coleccion.append(nueva_carta)
+        cartas[rareza].append(nueva_carta)
+        print_colored(f"La carta {nueva_carta} ha sido agregada a tu colección y a la lista de cartas.", "32")
+    else:
+        print_colored("La rareza ingresada no es válida. La carta no ha sido agregada.", "31")
+
 # Función principal del juego
 def juego():
     verificar_directorio()
@@ -243,7 +271,10 @@ def juego():
         print("3. Mostrar monedero")
         print("4. Buscar carta en la colección")
         print("5. Mostrar estadísticas")
-        print("6. Salir")
+        print("6. Mostrar cartas por rareza")
+        print("7. Eliminar carta de la colección")
+        print("8. Agregar carta personalizada")
+        print("9. Salir")
         
         comando = input("Ingresa un comando: ").strip().lower()
         if comando == "1":
@@ -257,6 +288,13 @@ def juego():
         elif comando == "5":
             mostrar_estadisticas()
         elif comando == "6":
+            rareza = input("¿Qué rareza quieres ver? (comun, rara, legendaria): ").strip().lower()
+            mostrar_cartas_por_rareza(rareza)
+        elif comando == "7":
+            eliminar_carta()
+        elif comando == "8":
+            agregar_carta_personalizada()
+        elif comando == "9":
             guardar_progreso()
             print_colored("Guardando el juego... ¡Hasta la próxima!", "34")
             break
